@@ -5,6 +5,16 @@
 
   <br><br>
 
+  <a href="README.md">
+    <img src="https://img.shields.io/badge/Language-English-007AFF?style=for-the-badge&logo=apple&logoColor=white" alt="English">
+  </a>
+  &nbsp;
+  <a href="README.de.md">
+    <img src="https://img.shields.io/badge/Sprache-Deutsch-555555?style=for-the-badge&logo=apple&logoColor=white" alt="Deutsch">
+  </a>
+
+  <br><br>
+
 [![Release](https://img.shields.io/badge/Release-v0.0.1-007AFF?logo=apple&logoColor=white)](https://github.com/pepperonas/marklook/releases)
 [![Build](https://img.shields.io/badge/Build-Passing-brightgreen?logo=apple&logoColor=white)](https://github.com/pepperonas/marklook)
 [![Tests](https://img.shields.io/badge/Tests-32%20Unit--Tests%20passed-brightgreen?logo=apple&logoColor=white)](Tests/MarkLookTests/)
