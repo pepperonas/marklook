@@ -1,7 +1,7 @@
 # MarkLook
 
 <div align="center">
-  <img src="assets/quicklook-preview.png" alt="MarkLook - Native Markdown Quick Look Previews for macOS" width="820">
+  <img src="assets/ml-optimized.png" alt="MarkLook - A minimal, powerful Markdown viewer for macOS" width="100%">
 
   <br><br>
 
