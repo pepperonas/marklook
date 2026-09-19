@@ -5,9 +5,12 @@ let start = CFAbsoluteTimeGetCurrent()
 
 HTMLSanitizerTests.run()
 ResourceResolverTests.run()
+LanguageLexerTests.run()
 SyntaxHighlighterTests.run()
 MarkdownRendererTests.run()
+ExtensionStatusTests.run()
 SettingsTests.run()
+CSSGeneratorTests.run()
 PerformanceTests.run()
 
 let totalTime = (CFAbsoluteTimeGetCurrent() - start) * 1000

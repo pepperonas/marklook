@@ -17,7 +17,7 @@
 
 [![Release](https://img.shields.io/badge/Release-v0.0.1-007AFF?logo=apple&logoColor=white)](https://github.com/pepperonas/marklook/releases)
 [![Build](https://img.shields.io/badge/Build-Passing-brightgreen?logo=apple&logoColor=white)](https://github.com/pepperonas/marklook)
-[![Tests](https://img.shields.io/badge/Tests-32%20Unit--Tests%20passed-brightgreen?logo=apple&logoColor=white)](Tests/MarkLookTests/)
+[![Tests](https://img.shields.io/badge/Tests-72%20Unit--Tests%20passed-brightgreen?logo=apple&logoColor=white)](Tests/MarkLookTests/)
 [![Lines of Code](https://img.shields.io/badge/LoC-3%2C251%20Lines%20of%20Swift-blue?logo=swift&logoColor=white)](Sources/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 <br>
@@ -192,7 +192,7 @@ macOS requires one-time approval for third-party Quick Look extensions:
 
 ## Running the Automated Test Suite
 
-MarkLook comes with a test harness with 32 unit and benchmark tests:
+MarkLook comes with a test harness with 72 unit and benchmark tests:
 
 ```bash
 swift run MarkLookTests
@@ -203,52 +203,98 @@ Output:
 Starting MarkLook Test Suite...
 
 --- Suite: HTMLSanitizer ---
-  ✓ testEscapeHTML (0.06ms)
+  ✓ testEscapeHTML (0.04ms)
   ✓ testSanitizeURLBlocksJavascript (0.11ms)
-  ✓ testSanitizeURLAllowsSafeSchemes (1.47ms)
-  ✓ testSanitizeRawHTMLStripsScriptTags (1.19ms)
-  ✓ testSanitizeRawHTMLStripsIframesAndObjects (0.83ms)
-  ✓ testSanitizeRawHTMLStripsEventHandlers (0.80ms)
+  ✓ testSanitizeURLEntityEncodedBypasses (1.18ms)
+  ✓ testSanitizeURLAllowsSafeSchemes (0.13ms)
+  ✓ testSanitizeURLTrimming (0.04ms)
+  ✓ testSanitizeRawHTMLStripsScriptTags (2.18ms)
+  ✓ testSanitizeRawHTMLStripsIframesAndObjects (1.01ms)
+  ✓ testSanitizeRawHTMLStripsFormsAndButtons (0.83ms)
+  ✓ testSanitizeRawHTMLStripsStylesAndMeta (0.85ms)
+  ✓ testSanitizeRawHTMLStripsEventHandlers (0.85ms)
+  ✓ testSanitizeRawHTMLStripsJavascriptInHrefAndSrc (0.95ms)
 
 --- Suite: ResourceResolver ---
-  ✓ testResolveDataURI (0.08ms)
-  ✓ testResolveRemoteImageBlockedWhenDisallowed (0.00ms)
-  ✓ testResolveRemoteImageAllowedWhenEnabled (0.08ms)
-  ✓ testResolveLocalRelativeImage (5.80ms)
-  ✓ testPathTraversalBlocked (0.46ms)
-  ✓ testMimeTypeDetection (0.11ms)
+  ✓ testResolveDataURI (0.07ms)
+  ✓ testResolveRemoteImageBlockedWhenDisallowed (0.01ms)
+  ✓ testResolveRemoteImageAllowedWhenEnabled (0.06ms)
+  ✓ testResolveLocalRelativeImage (6.62ms)
+  ✓ testResolveAbsoluteDiskPath (0.63ms)
+  ✓ testPathTraversalBlocked (0.44ms)
+  ✓ testResolveNonExistentLocalImageReturnsError (0.16ms)
+  ✓ testResolveImageWithNilDocumentURL (0.05ms)
+  ✓ testMimeTypeDetectionComprehensive (1.32ms)
+
+--- Suite: LanguageLexer & SupportedLanguages ---
+  ✓ testLanguageFromIdentifierAliases (0.06ms)
+  ✓ testLanguageDisplayNames (0.00ms)
+  ✓ testUnknownLanguageHandling (0.00ms)
+  ✓ testTokenStructInitialization (0.00ms)
 
 --- Suite: SyntaxHighlighter ---
-  ✓ testSwiftHighlighting (0.23ms)
-  ✓ testRustHighlighting (0.07ms)
-  ✓ testPythonHighlighting (0.05ms)
-  ✓ testSQLHighlighting (0.04ms)
+  ✓ testSwiftHighlighting (0.19ms)
+  ✓ testRustHighlighting (0.06ms)
+  ✓ testPythonHighlighting (0.04ms)
+  ✓ testJavaScriptAndTypeScriptHighlighting (0.11ms)
+  ✓ testJavaAndKotlinHighlighting (0.09ms)
+  ✓ testSQLHighlighting (0.05ms)
+  ✓ testBashHighlighting (0.03ms)
   ✓ testJSONHighlighting (0.02ms)
-  ✓ testEscapesRawHTMLInCode (0.03ms)
+  ✓ testCSSHighlighting (0.04ms)
+  ✓ testBlockComments (0.03ms)
+  ✓ testEscapesRawHTMLInCode (0.02ms)
+  ✓ testEmptyAndUnknownLanguageFallback (0.00ms)
 
 --- Suite: MarkdownRenderer ---
-  ✓ testBasicMarkdownRendering (4.59ms)
-  ✓ testHeadingsLevels (1.49ms)
-  ✓ testTaskListRendering (0.80ms)
-  ✓ testTableRendering (1.16ms)
-  ✓ testBlockquoteRendering (0.58ms)
-  ✓ testCodeBlockWithLanguage (0.89ms)
-  ✓ testMaliciousScriptTagSanitized (1.69ms)
-  ✓ testLargeFileTruncation (2.03ms)
+  ✓ testBasicMarkdownRendering (7.56ms)
+  ✓ testHeadingsLevels (1.50ms)
+  ✓ testHeadingAnchorSlugGeneration (0.37ms)
+  ✓ testInlineCodeRendering (0.29ms)
+  ✓ testStrikethroughRendering (0.30ms)
+  ✓ testThematicBreakRendering (0.34ms)
+  ✓ testLinkWithTitleAndAttributes (1.06ms)
+  ✓ testImageRenderingBlockedAndAllowed (1.30ms)
+  ✓ testOrderedListCustomStartIndex (0.52ms)
+  ✓ testTaskListRendering (0.67ms)
+  ✓ testTableRendering (0.97ms)
+  ✓ testBlockquoteRendering (0.50ms)
+  ✓ testCodeBlockWithLanguage (1.08ms)
+  ✓ testSyntaxHighlightingDisabledSetting (0.98ms)
+  ✓ testPageTitleExtractionFromHeading (0.80ms)
+  ✓ testMaliciousScriptTagSanitized (1.90ms)
+  ✓ testLargeFileTruncation (2.82ms)
+
+--- Suite: ExtensionStatus ---
+  ✓ testExtensionStatusTitles (0.00ms)
+  ✓ testExtensionStatusIsOperational (0.00ms)
+  ✓ testExtensionBundleIdConstant (0.00ms)
 
 --- Suite: Settings & Theme ---
-  ✓ testSettingsDefaults (0.01ms)
-  ✓ testSettingsEncodingDecoding (0.14ms)
+  ✓ testSettingsDefaults (0.00ms)
+  ✓ testSettingsEncodingDecoding (0.19ms)
+  ✓ testTextSizeEnumProperties (0.00ms)
+  ✓ testContentWidthEnumProperties (0.00ms)
+  ✓ testAppearanceEnumProperties (0.00ms)
+  ✓ testSharedDefaultsAppGroupConstants (0.00ms)
   ✓ testCSSGeneratorWithDarkAppearance (0.01ms)
   ✓ testCSSGeneratorWithLightAppearance (0.01ms)
 
+--- Suite: CSSGenerator ---
+  ✓ testSystemAppearanceMediaQueries (0.04ms)
+  ✓ testLightOnlyAppearance (0.14ms)
+  ✓ testDarkOnlyAppearance (0.14ms)
+  ✓ testTextSizesInGeneratedCSS (0.32ms)
+  ✓ testContentWidthsInGeneratedCSS (0.15ms)
+  ✓ testCoreClassesPresentInCSS (1.36ms)
+
 --- Suite: Performance Benchmarks ---
-  ✓ testSmallDocumentPerformance (11.51ms)
-  ✓ testMediumDocumentPerformance (30.68ms)
+  ✓ testSmallDocumentPerformance (12.80ms)
+  ✓ testMediumDocumentPerformance (33.75ms)
 
 ==================================================
 TEST RESULT: SUCCESS
-All 32 unit tests passed successfully!
+All 72 unit tests passed successfully!
 ==================================================
 ```
 

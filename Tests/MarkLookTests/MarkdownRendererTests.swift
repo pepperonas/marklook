@@ -45,6 +45,70 @@ public enum MarkdownRendererTests {
                 try assertTrue(html.contains("<h6 id=\"h6\">H6</h6>"))
             }
             
+            runner.runTest(name: "testHeadingAnchorSlugGeneration") {
+                let md = "# Welcome to MarkLook: The Best Preview (v1.0)!"
+                let renderer = MarkdownRenderer()
+                let html = renderer.renderHTML(markdown: md)
+                try assertTrue(html.contains("id=\"welcome-to-marklook-the-best-preview-v1-0\""))
+            }
+            
+            runner.runTest(name: "testInlineCodeRendering") {
+                let md = "Here is `let a = \"hello & world\"` in code."
+                let renderer = MarkdownRenderer()
+                let html = renderer.renderHTML(markdown: md)
+                try assertTrue(html.contains("<code>let a = &quot;hello &amp; world&quot;</code>"))
+            }
+            
+            runner.runTest(name: "testStrikethroughRendering") {
+                let md = "This is ~~deprecated code~~."
+                let renderer = MarkdownRenderer()
+                let html = renderer.renderHTML(markdown: md)
+                try assertTrue(html.contains("<del>deprecated code</del>"))
+            }
+            
+            runner.runTest(name: "testThematicBreakRendering") {
+                let md = "Above\n\n---\n\nBelow"
+                let renderer = MarkdownRenderer()
+                let html = renderer.renderHTML(markdown: md)
+                try assertTrue(html.contains("<hr>"))
+            }
+            
+            runner.runTest(name: "testLinkWithTitleAndAttributes") {
+                let md = "[Apple](https://apple.com \"Apple Website\")"
+                let renderer = MarkdownRenderer()
+                let html = renderer.renderHTML(markdown: md)
+                try assertTrue(html.contains("href=\"https://apple.com\""))
+                try assertTrue(html.contains("target=\"_blank\""))
+                try assertTrue(html.contains("rel=\"noopener noreferrer\""))
+                try assertTrue(html.contains("title=\"Apple Website\""))
+                try assertTrue(html.contains(">Apple</a>"))
+            }
+            
+            runner.runTest(name: "testImageRenderingBlockedAndAllowed") {
+                let md = "![Remote Photo](https://example.com/test.jpg \"My Photo\")"
+                
+                // Blocked by default
+                let blockedRenderer = MarkdownRenderer(settings: MarkLookSettings(allowRemoteImages: false))
+                let blockedHTML = blockedRenderer.renderHTML(markdown: md)
+                try assertTrue(blockedHTML.contains("image-blocked"))
+                try assertTrue(blockedHTML.contains("Remote image blocked"))
+                
+                // Allowed when enabled
+                let allowedRenderer = MarkdownRenderer(settings: MarkLookSettings(allowRemoteImages: true))
+                let allowedHTML = allowedRenderer.renderHTML(markdown: md)
+                try assertTrue(allowedHTML.contains("<img src=\"https://example.com/test.jpg\""))
+                try assertTrue(allowedHTML.contains("alt=\"Remote Photo\""))
+                try assertTrue(allowedHTML.contains("title=\"My Photo\""))
+            }
+            
+            runner.runTest(name: "testOrderedListCustomStartIndex") {
+                let md = "3. Third item\n4. Fourth item\n"
+                let renderer = MarkdownRenderer()
+                let html = renderer.renderHTML(markdown: md)
+                try assertTrue(html.contains("<ol start=\"3\">"))
+                try assertTrue(html.contains("<li>Third item</li>"))
+            }
+            
             runner.runTest(name: "testTaskListRendering") {
                 let md = """
                 - [x] Finished task
@@ -95,6 +159,25 @@ public enum MarkdownRendererTests {
                 try assertTrue(html.contains("class=\"code-header\""))
                 try assertTrue(html.contains("Swift"))
                 try assertTrue(html.contains("<code class=\"language-swift\">"))
+            }
+            
+            runner.runTest(name: "testSyntaxHighlightingDisabledSetting") {
+                let md = "```swift\nfunc test() {}\n```"
+                let renderer = MarkdownRenderer(settings: MarkLookSettings(enableSyntaxHighlighting: false))
+                let html = renderer.renderHTML(markdown: md)
+                
+                try assertFalse(html.contains("class=\"hl-kw\""))
+                try assertTrue(html.contains("func test() {}"))
+            }
+            
+            runner.runTest(name: "testPageTitleExtractionFromHeading") {
+                let md = "# Title of My Doc\n\nContent here."
+                let renderer = MarkdownRenderer()
+                let html = renderer.renderHTML(markdown: md)
+                try assertTrue(html.contains("<title>Title of My Doc</title>"))
+                
+                let explicitTitleHTML = renderer.renderHTML(markdown: md, documentTitle: "Overridden Title")
+                try assertTrue(explicitTitleHTML.contains("<title>Overridden Title</title>"))
             }
             
             runner.runTest(name: "testMaliciousScriptTagSanitized") {

@@ -49,8 +49,29 @@ public enum HTMLSanitizer {
             }
         }
         
-        // Disallow arbitrary encoded javascript (e.g. &#106;avascript:)
-        let decoded = trimmed.replacingOccurrences(of: "&#[xX]?[0-9a-fA-F]+;", with: "", options: .regularExpression)
+        // Decode HTML numeric character references (e.g. &#106; -> j, &#x6a; -> j)
+        var decoded = trimmed
+        if let regex = try? NSRegularExpression(pattern: "&#(?:x([0-9a-fA-F]+)|([0-9]+));", options: .caseInsensitive) {
+            let nsString = decoded as NSString
+            let matches = regex.matches(in: decoded, options: [], range: NSRange(location: 0, length: nsString.length)).reversed()
+            for match in matches {
+                var charStr: String?
+                if match.range(at: 1).location != NSNotFound {
+                    let hex = nsString.substring(with: match.range(at: 1))
+                    if let code = UInt32(hex, radix: 16), let scalar = UnicodeScalar(code) {
+                        charStr = String(scalar)
+                    }
+                } else if match.range(at: 2).location != NSNotFound {
+                    let dec = nsString.substring(with: match.range(at: 2))
+                    if let code = UInt32(dec, radix: 10), let scalar = UnicodeScalar(code) {
+                        charStr = String(scalar)
+                    }
+                }
+                if let replacement = charStr {
+                    decoded = (decoded as NSString).replacingCharacters(in: match.range, with: replacement)
+                }
+            }
+        }
         let lowerDecoded = decoded.lowercased()
         for dangerous in dangerousProtocols {
             if lowerDecoded.contains(dangerous) || lowerDecoded.hasPrefix(dangerous) {
