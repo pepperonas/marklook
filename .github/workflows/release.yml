@@ -25,9 +25,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Select Xcode Version
+      - name: Select Xcode 16 (Swift 6)
         run: |
-          sudo xcode-select -s /Applications/Xcode_16.0.app || sudo xcode-select -s /Applications/Xcode.app
+          XCODE_APP=$(ls -d /Applications/Xcode_16*.app 2>/dev/null | sort -V | tail -n 1)
+          if [ -n "$XCODE_APP" ]; then
+            echo "Selecting $XCODE_APP"
+            sudo xcode-select -s "$XCODE_APP/Contents/Developer"
+          fi
           swift --version
 
       - name: Run Test Suite
