@@ -133,7 +133,13 @@ MarkLook
 
 ## Installation & Quick Look Activation
 
-### 1. Build & Install via Script
+### 1. Download Pre-built Release (Recommended)
+
+1. Download the latest `MarkLook-v*.zip` from [GitHub Releases](https://github.com/pepperonas/marklook/releases).
+2. Unzip and drag `MarkLook.app` into `/Applications`.
+3. Launch `MarkLook.app` once to register the extension.
+
+### 2. Build & Install from Source
 
 ```bash
 # Clone the repository
@@ -144,7 +150,7 @@ cd marklook
 ./Scripts/install_app.sh
 ```
 
-### 2. Enable in macOS System Settings
+### 3. Enable in macOS System Settings
 
 macOS requires one-time approval for third-party Quick Look extensions:
 

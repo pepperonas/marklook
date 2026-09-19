@@ -41,3 +41,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Developer Scripts**:
   - `Scripts/build_app.sh`: Automated bundle assembly and ad-hoc codesigning.
   - `Scripts/install_app.sh`: Automatic installation to `/Applications` and Quick Look cache reload.
+  - `Scripts/package_release.sh`: Automated release packaging with `ditto` and SHA256 checksum generation.

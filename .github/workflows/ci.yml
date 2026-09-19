@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-and-build:
+    name: Test and Build
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Select Xcode Version
+        run: |
+          sudo xcode-select -s /Applications/Xcode_16.0.app || sudo xcode-select -s /Applications/Xcode.app
+          swift --version
+
+      - name: Run Test Suite
+        run: |
+          swift run MarkLookTests
+
+      - name: Build Application Bundle
+        run: |
+          ./Scripts/build_app.sh release
