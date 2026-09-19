@@ -1,20 +1,24 @@
 # MarkLook
 
 <div align="center">
+  <img src="assets/quicklook-preview.png" alt="MarkLook - Native Markdown Quick Look Previews for macOS" width="820">
 
-  <h1>MarkLook</h1>
-  <p><strong>Fast, beautiful, native Markdown Quick Look previews for macOS.</strong></p>
+  <br><br>
 
 [![Release](https://img.shields.io/badge/Release-v0.0.1-007AFF?logo=apple&logoColor=white)](https://github.com/pepperonas/marklook/releases)
 [![Build](https://img.shields.io/badge/Build-Passing-brightgreen?logo=apple&logoColor=white)](https://github.com/pepperonas/marklook)
-[![Tests](https://img.shields.io/badge/Tests-32%20passed-brightgreen?logo=apple&logoColor=white)](Tests/MarkLookTests/)
-[![Lines of Code](https://img.shields.io/badge/LoC-3%2C251-blue?logo=swift&logoColor=white)](Sources/)
+[![Tests](https://img.shields.io/badge/Tests-32%20Unit--Tests%20passed-brightgreen?logo=apple&logoColor=white)](Tests/MarkLookTests/)
+[![Lines of Code](https://img.shields.io/badge/LoC-3%2C251%20Lines%20of%20Swift-blue?logo=swift&logoColor=white)](Sources/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 <br>
 [![Platform](https://img.shields.io/badge/Platform-macOS%2014%2B-000000?logo=apple&logoColor=white)](https://apple.com/macos)
 [![Swift](https://img.shields.io/badge/Swift-6.4-FA7343?logo=swift&logoColor=white)](https://swift.org)
-[![Sandboxed](https://img.shields.io/badge/Sandbox-Hardened%20App%20Sandbox-success?logo=apple&logoColor=white)](Sources/MarkLookPreview/Resources/MarkLookPreview.entitlements)
+[![Sandboxed](https://img.shields.io/badge/Sandbox-App%20Sandbox%20%2B%20Read--Only-success?logo=apple&logoColor=white)](Sources/MarkLookPreview/Resources/MarkLookPreview.entitlements)
+[![Offline](https://img.shields.io/badge/Works-100%25%20Offline-blue?logo=apple&logoColor=white)](https://github.com/pepperonas/marklook)
 [![Zero Telemetry](https://img.shields.io/badge/Telemetry-None%20%E2%9C%93-success)](https://github.com/pepperonas/marklook)
+[![Security Audit](https://img.shields.io/badge/Security-Audited%202026--09-0e8a16?logo=github&logoColor=white)](https://github.com/pepperonas/marklook)
+[![SemVer](https://img.shields.io/badge/SemVer-2.0.0-3F4551)](https://semver.org)
+[![Keep a Changelog](https://img.shields.io/badge/Changelog-Keep%20a%20Changelog-E05735?logo=keepachangelog&logoColor=white)](CHANGELOG.md)
 <br><br>
 <a href="https://www.paypal.com/donate/?business=martin.pfeffer%40celox.io&item_name=MarkLook&currency_code=EUR">
   <img src="https://img.shields.io/badge/☕_Buy_the_dev_a_coffee-Donate_via_PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white" height="42" alt="Donate via PayPal" />
@@ -25,7 +29,7 @@
 ```
 ┌────────────────────────────────────────────────────────────┐
 │  Finder → Select Any Markdown File (.md) → Press Space     │
-│  Instant, beautifully rendered Markdown preview!           │
+│  Instant, beautifully rendered native Markdown preview!    │
 └────────────────────────────────────────────────────────────┘
 ```
 
@@ -35,88 +39,64 @@
 
 ## Overview
 
-**MarkLook** is a lightweight, blazing-fast native macOS application and Quick Look Preview Extension (`io.celox.marklook.preview`) that brings rich Markdown rendering directly to the Finder.
+**MarkLook** is a lightweight, blazing-fast native macOS application and Quick Look Preview Extension (`io.celox.marklook.preview`) that brings rich Markdown rendering directly to the macOS Finder.
 
-Pressing **Space** on any `.md` or `.markdown` file instantly displays formatted typography, syntax-highlighted code blocks, GitHub-style task lists, and styled tables — without third-party web runtimes, Electron, or background daemons.
+Pressing **Space** on any `.md` or `.markdown` file instantly presents formatted typography, pure-Swift syntax-highlighted code blocks, GitHub-style task lists, and styled tables — without third-party web runtimes, Electron, or background daemons.
 
-Designed according to Apple's Human Interface Guidelines, MarkLook looks and feels like a native macOS component.
+Designed strictly according to Apple's Human Interface Guidelines, MarkLook looks and feels like a native macOS system component.
 
 ---
 
-## Highlights
+## Screenshots
 
-- ⚡ **Instant Preview**: Fast startup using Apple's modern data-based `QLPreviewProvider` and `QLPreviewReply` APIs (macOS 12+).
-- 🎨 **Native Apple HIG Design**: Typography powered by SF Pro and SF Mono with automatic Light and Dark Mode switching via `@media (prefers-color-scheme)`.
+| Visual Showcase & Typography | Syntax Highlighting | GFM Task Lists & Tables |
+| :---: | :---: | :---: |
+| <img src="assets/quicklook-preview.png" width="280"> | <img src="assets/quicklook-code.png" width="280"> | <img src="assets/quicklook-tables.png" width="280"> |
+
+---
+
+## Key Features
+
+- ⚡ **Instant Preview**: Rapid startup using Apple's modern data-based `QLPreviewProvider` and `QLPreviewReply` APIs (macOS 12.0+).
+- 🎨 **Apple Design Language**: Typography powered by San Francisco (`SF Pro`) and monospace font (`SF Mono`) with automatic Light and Dark Mode switching via `@media (prefers-color-scheme: dark)`.
 - 🛠️ **Full CommonMark & GFM Support**: Headings (H1–H6), bold, italic, strikethrough, blockquotes, ordered/unordered lists, task lists, and tables.
 - 🌈 **Pure-Swift Syntax Highlighting**: In-process code tokenization for 15+ programming languages without client-side JavaScript execution.
-- 🛡️ **Hardened Sandboxing**: Runs strictly isolated within macOS's App Extension Sandbox (`com.apple.security.app-sandbox`) with full path traversal and XSS protections.
-- 🔒 **Zero Telemetry & Offline**: Zero network tracking, zero external scripts, with remote images blocked by default to prevent tracking pixels.
-- 💻 **Companion macOS App**: Built-in interactive live preview editor, configuration panel, and real-time extension diagnostic status.
-
----
-
-## Visual Demonstration
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│  [×] [-] [+]  Architecture.md — Quick Look                             │
-├────────────────────────────────────────────────────────────────────────┤
-│                                                                        │
-│  # Architecture Overview                                               │
-│                                                                        │
-│  The application is built entirely in **Swift 6** and supports:        │
-│                                                                        │
-│  - [x] CommonMark parsing                                              │
-│  - [x] GitHub Flavored Tables                                          │
-│  - [x] Syntax-highlighted code blocks                                  │
-│                                                                        │
-│  ```swift                                                              │
-│  struct ServerConfig: Codable {                                        │
-│      let host: String                                                  │
-│      let port: Int                                                     │
-│  }                                                                     │
-│  ```                                                                   │
-│                                                                        │
-│  | Layer             | Implementation   | Status   |                   │
-│  | :---------------- | :--------------- | :------- |                   │
-│  | Quick Look Engine | QLPreviewProvider| Active   |                   │
-│  | Markdown Core     | swift-markdown   | Native   |                   │
-│                                                                        │
-└────────────────────────────────────────────────────────────────────────┘
-```
+- 🛡️ **Hardened Sandboxing**: Isolated within macOS's App Extension Sandbox (`com.apple.security.app-sandbox`) with path traversal and XSS protections.
+- 🔒 **Zero Telemetry & 100% Offline**: Zero tracking, zero remote scripts, with remote images blocked by default to prevent tracking pixels.
+- 💻 **Native Companion App**: Built-in interactive live preview editor, configuration panel, and real-time extension diagnostic status.
 
 ---
 
 ## Supported Markdown Features
 
-| Feature | Syntax Example | Supported |
-| :--- | :--- | :---: |
-| **Headings** | `# H1` through `###### H6` with anchor IDs | ✅ |
-| **Emphasis** | `**bold**`, `*italic*`, `***both***` | ✅ |
-| **Strikethrough** | `~~deleted text~~` | ✅ |
-| **Inline Code** | `` `let value = 10` `` | ✅ |
-| **Fenced Code Blocks** | ```` ```swift ... ``` ```` with language identifier | ✅ |
-| **Blockquotes** | `> Callout quote` | ✅ |
-| **Lists** | `- Unordered`, `1. Ordered`, nested structures | ✅ |
-| **Task Lists** | `- [x] Completed`, `- [ ] Pending` | ✅ |
-| **Tables** | `\| Header \| Cell \|` with column alignments (`:---`, `:---:`) | ✅ |
-| **Thematic Breaks** | `---` horizontal rules | ✅ |
-| **Safe Links** | `[Title](https://example.com)` (opens in browser) | ✅ |
-| **Images** | `![Alt](./images/pic.png)` (safe relative resolution) | ✅ |
-| **Unicode & Emojis** | Full multilingual character sets and symbols | ✅ |
+| Feature | Syntax Example | Supported | Details |
+| :--- | :--- | :---: | :--- |
+| **Headings** | `# H1` through `###### H6` | ✅ | Includes auto-generated anchor IDs |
+| **Emphasis** | `**bold**`, `*italic*`, `***both***` | ✅ | Apple SF Pro typography |
+| **Strikethrough** | `~~deleted text~~` | ✅ | GitHub Flavored Markdown |
+| **Inline Code** | `` `let value = 10` `` | ✅ | SF Mono with subtle container |
+| **Code Blocks** | ```` ```swift ... ``` ```` | ✅ | Syntax highlighted with language badge |
+| **Blockquotes** | `> Callout quote` | ✅ | Native Apple callout styling |
+| **Lists** | `- Unordered`, `1. Ordered` | ✅ | Tight spacing, nested lists |
+| **Task Lists** | `- [x] Done`, `- [ ] Pending` | ✅ | Custom native checkboxes |
+| **Tables** | `\| Header \| Cell \|` | ✅ | Column alignments (`:---`, `:---:`, `---:`) |
+| **Thematic Breaks** | `---` | ✅ | Subtle macOS dividers |
+| **Safe Links** | `[Title](https://...)` | ✅ | Opens in default browser |
+| **Images** | `![Alt](./images/pic.png)` | ✅ | Safe local relative loading via Base64 |
+| **Unicode & Emojis** | Multilingual text & emojis | ✅ | Full UTF-8 internationalization |
 
-### Code Syntax Highlighting
+### Syntax Highlighting in Pure Swift
 
 MarkLook includes a custom tokenizer written in pure Swift supporting:
 
 - **Languages**: Swift, Rust, Python, JavaScript, TypeScript, Go, Java, Kotlin, C/C++, HTML, CSS, JSON, YAML, XML, SQL, Shell/Bash, and Markdown.
-- **Safety**: Code is pre-rendered into sanitized HTML spans (`<span class="hl-kw">...</span>`) on the host side. No JavaScript engine runs inside the preview window.
+- **Security**: Code is tokenized into sanitized HTML spans (`<span class="hl-kw">...</span>`) on the host side. No JavaScript engine runs inside the preview window.
 
 ---
 
 ## Project Architecture
 
-```
+```text
 MarkLook
 ├── MarkLook.app (Host Application)
 │   ├── Contents/MacOS/MarkLook (AppKit companion app)
@@ -151,7 +131,7 @@ MarkLook
 
 ---
 
-## Installation & Activation
+## Installation & Quick Look Activation
 
 ### 1. Build & Install via Script
 
@@ -171,7 +151,7 @@ macOS requires one-time approval for third-party Quick Look extensions:
 1. Open **System Settings** → **Privacy & Security** → **Extensions**.
 2. Click **Quick Look**.
 3. Toggle **MarkLook QuickLook Preview** to enabled.
-4. If Finder still shows raw text, reload the generator cache:
+4. If Finder still shows raw plain text, reload the generator cache:
    ```bash
    qlmanage -r && qlmanage -r cache && killall Finder
    ```
@@ -182,7 +162,7 @@ macOS requires one-time approval for third-party Quick Look extensions:
 
 1. Open Finder and navigate to the project directory:
    ```bash
-   open .
+   open /Applications/MarkLook.app
    ```
 2. Select the included test file: **`MARKDOWN_TEST.md`**.
 3. Press **Space**.
@@ -258,7 +238,7 @@ All 32 unit tests passed successfully!
 
 ---
 
-## Security Concept
+## Security Architecture
 
 Markdown files can originate from untrusted sources (e.g., git clones, downloads). MarkLook enforces strict security guarantees:
 
